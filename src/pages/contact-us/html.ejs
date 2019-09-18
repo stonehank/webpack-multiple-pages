@@ -1,0 +1,43 @@
+<section class="contact-us-wrap">
+    <div class="background-render">
+        <div class="symbol-pic">
+            <img class="symbol-pic-img" src="<%= require('assetsDir/image/contact-us/symbol.png') %>" alt="Asiatechub Web Development" />
+        </div>
+    </div>
+    <div class="data-render">
+        <div class="data-top">
+            <p class="data-top-title">
+                <%= lang.p1 %>
+            </p>
+            <h1><button type="button" class="contact-us-btn hover-line-ani"  data-toggle="modal" data-target="#myModal" ><%= lang.h1 %></button></h1>
+        </div>
+        <div class="data-bottom">
+            <aside class="data-draw">
+                <div class="draw-icon">
+                    <img src="<%= require('assetsDir/image/contact-us/logo-Icon.png') %>"  alt="Asiatechub App Development"/>
+                </div>
+                <div class="draw-text">
+                    <p class="draw-text-email hover-line-ani">
+                        <a  href="mailto:letstalk@asiatechub.com" title="mail"> letstalk@asiatechub.com</a>
+                    </p>
+                    <p class="draw-text-tel">
+                        <a href="tel:60333183002" title="call">+603 3318 3002</a>
+                    </p>
+                    <p class="draw-text-tel draw-whatsapp" onclick="return gtag_report_conversion3('https://wa.me/60129117461?text=Hi, I would like to know more. Thank you.')" >
+                        +601 2911 7461
+                        <img  src="<%= require('assetsDir/image/contact-us/whasapp-b-logo.png') %>" alt="Contact Us"/>
+                    </p>
+                    <p class="draw-text-address">
+                        <span>Jalan Ramin 3,</span>
+                        <span>Bandar Botanik 41200 Klang</span>
+                    </p>
+                </div>
+            </aside>
+
+            <div id="googleMap" class="data-map"></div>
+        </div>
+    </div>
+</section>
+
+<%= require('componentsDir/contact-form/html.ejs')({lang:formLang})%>
+

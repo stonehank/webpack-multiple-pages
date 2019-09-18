@@ -1,0 +1,244 @@
+const path = require('path')
+const TerserJSPlugin = require('terser-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const safePostCssParser = require('postcss-safe-parser')
+const isDev = process.env.NODE_ENV === 'development'
+const dirVars = require('./webpack-config/base/dir-vars.config.js')
+const { publicPath } = require('./webpack-config/config')
+
+module.exports = {
+  mode: isDev ? 'development' : 'production',
+  entry: require('./webpack-config/entry.config.js'),
+
+  output: {
+    path: path.join(__dirname, './dist'),
+    filename: isDev ? 'js/[name].js' : 'js/[name].[contenthash:8].js',
+    publicPath: publicPath === '' ? '/' : publicPath
+  },
+  resolve: {
+    extensions: ['.js'],
+    alias: {
+
+      configDir: dirVars.configDir,
+      vendorDir: dirVars.vendorDir,
+
+      /* less */
+      cssDir: dirVars.cssDir,
+      jsDir: dirVars.jsDir,
+      /* img */
+      assetsDir: dirVars.assetsDir,
+
+      /* components */
+      componentsDir: dirVars.componentsDir,
+
+      /* layout */
+      layoutDir: dirVars.layoutDir,
+      layout: path.resolve(dirVars.layoutDir, 'layout/html'),
+      //
+      /* logic */
+      logicDir: dirVars.logicDir,
+      commonPage: path.resolve(dirVars.logicDir, 'common.page'),
+
+      webpackConfig: dirVars.webpackConfig
+    }
+  },
+  devtool: isDev ? 'cheap-module-eval-source-map' : false,
+
+  plugins: require('./webpack-config/plugins.config.js'),
+  optimization: {
+    minimize: !isDev,
+    minimizer: [new TerserJSPlugin({
+      cache: true,
+      parallel: true,
+      terserOptions: {
+        parse: {
+          ecma: 8,
+        },
+        compress: isDev
+          ? false
+          : {
+            ecma: 5,
+            warnings: false,
+            comparisons: false,
+            inline: 2,
+          },
+        output: {
+          ecma: 5,
+          comments: false,
+          ascii_only: true,
+        },
+        ie8: true,
+        safari10: true
+      }
+    }), new OptimizeCSSAssetsPlugin({
+      parser: safePostCssParser,
+    })],
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        libs: {
+          test: /node_modules/,
+          name: 'libs',
+          minChunks: 4,
+          minSize: 0,
+          priority: 30,
+        },
+        commons: {
+          name: 'commons',
+          enforce: true,
+          minChunks: 4,
+          minSize: 0,
+          priority: 20,
+        },
+        vendors:false,
+        default: false
+      },
+    },
+    runtimeChunk: {
+      name: 'manifest'
+    }
+  },
+  module: {
+    rules: [
+      {
+        oneOf: [
+          // {
+          //   enforce: 'pre',
+          //   test: /\.js$/,
+          //   exclude: /(node_modules|src\/js|src\/css)/,
+          //   loader: 'eslint-loader',
+          //   options: {
+          //     fix: true
+          //   }
+          // },
+          {
+            test: /\.js$/,
+            include: dirVars.srcRootDir,
+            exclude: /node_modules/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: true,
+                babelrc: true,
+              }
+            }
+          },
+
+          {
+            test: /\.s?css$/,
+            use: [
+              { loader: MiniCssExtractPlugin.loader },
+              {
+                loader: 'css-loader',
+                options: {
+                  // 开启css中的图片打包功能
+                  url: true,
+                  importLoaders: 2,
+                  sourceMap: isDev
+                }
+              },
+              // All the rules in postcss.config.js
+              {
+                loader: 'postcss-loader',
+                options: {
+                  ident: 'postcss',
+                  config: {
+                    ctx: {
+                      'postcss-preset-env': {
+                        autoprefixer: {
+                          flexbox: 'no-2009',
+                        },
+                        stage: 3
+                      },
+                      'postcss-flexbugs-fixes': {},
+                      cssnano: {},
+                    }
+                  }
+                }
+              },
+              {
+                loader: 'sass-loader',
+              }
+            ],
+          },
+          {
+            test: /\.ejs$/,
+            include: dirVars.srcRootDir,
+            exclude: /node_modules/,
+            loader: 'ejs-loader',
+          },
+          {
+            test: /\.(png|jpe?g|gif|svg)$/,
+            include: dirVars.assetsDir,
+            use: [
+              {
+                loader: 'url-loader',
+                options: {
+                  limit: isDev ? 0 : 4096,
+                  name: 'image/[name]-[contenthash:8].[ext]',
+                  publicPath: '/'
+                },
+              },
+            ],
+          },
+          {
+            test: /\.ico$/,
+            include: dirVars.assetsDir,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: 'image/[name].[ext]',
+                  publicPath: '/'
+                },
+              },
+            ],
+          },
+          {
+            loader: 'file-loader',
+            exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+            options: {
+              name: 'static/[name].[contenthash:8].[ext]',
+            },
+          },
+        ]
+      }
+    ],
+  },
+  stats: {
+    all: false,
+    modules: true,
+    maxModules: 0,
+    errors: true,
+    warnings: true,
+    timings: true,
+  },
+  watchOptions: {
+    aggregateTimeout: 2000,
+    poll: 3000
+  },
+  devServer: isDev ? {
+    overlay: true,
+    noInfo: false,
+    clientLogLevel: 'silent',
+    stats: 'errors-only',
+    hot: true,
+    port: 3000,
+    host: getIP(),
+  } : {},
+}
+
+function getIP (force) {
+  if (force) return force
+  const os = require('os')
+  const ifaces = os.networkInterfaces()
+  for (const key in ifaces) {
+    for (const details of ifaces[key]) {
+      if (details.family === 'IPv4' && details.address !== '127.0.0.1') {
+        return details.address
+      }
+    }
+  }
+  return '0.0.0.0'
+}

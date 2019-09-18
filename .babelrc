@@ -1,0 +1,12 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules":"umd",
+        "corejs": "2",
+        "useBuiltIns": "usage"
+      }
+    ]
+  ]
+}
