@@ -1,5 +1,5 @@
 module.exports={
-  langList:['en'],
+  langList:['en','cn'],
   languageUrlStr : {
     en: '',
     cn: '/cn',

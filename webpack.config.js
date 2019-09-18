@@ -23,11 +23,14 @@ module.exports = {
       configDir: dirVars.configDir,
       vendorDir: dirVars.vendorDir,
 
+      assetsDir: dirVars.assetsDir,
       /* less */
       cssDir: dirVars.cssDir,
       jsDir: dirVars.jsDir,
       /* img */
-      assetsDir: dirVars.assetsDir,
+      imageDir: dirVars.imageDir,
+
+
 
       /* components */
       componentsDir: dirVars.componentsDir,

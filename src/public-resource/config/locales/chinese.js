@@ -3,49 +3,53 @@ module.exports = {
   topNav: {
     menu: '菜单',
     home: '主页',
-    about: '关于',
+    aboutU: '关于',
     projects: '项目',
-    contact: '联系我们!'
+    contactU: '联系我们'
   },
   footer: {
+    footer:'页脚',
     home: '主页',
-    about: '关于',
+    aboutU: '关于',
     projects: '项目',
-    contact: '联系我们!'
+    contactU: '联系我们'
   },
   pages: {
     [abbreviation.index]: {
       meta: {
-        title: '标题',
+        title: '首页标题',
         og_title: 'og标题',
-        keywords: '关键词',
+        keywords: '首页关键词',
         og_url: '唯一link',
-        description: '描述',
+        description: '首页描述',
         og_description: 'og描述',
-        og_image: '分享时的图片'
+        og_image: '首页分享时的图片'
       },
+      home: '主页',
     },
     [abbreviation['contact-us']]: {
       meta: {
-        title: '标题',
+        title: '联系页面标题',
         og_title: 'og标题',
-        keywords: '关键词',
+        keywords: '联系页面关键词',
         og_url: '唯一link',
-        description: '描述',
+        description: '联系页面描述',
         og_description: 'og描述',
-        og_image: '分享时的图片'
+        og_image: '联系页面分享时的图片'
       },
+      contactU: '联系我们'
     },
     [abbreviation['about-us']]: {
       meta: {
-        title: '标题',
+        title: '关于页面标题',
         og_title: 'og标题',
-        keywords: '关键词',
+        keywords: '关于页面关键词',
         og_url: '唯一link',
-        description: '描述',
+        description: '关于页面描述',
         og_description: 'og描述',
-        og_image: '分享时的图片'
+        og_image: '关于页面分享时的图片'
       },
+      aboutU: '关于我们',
     },
     [abbreviation['privacy-policy']]: {
       meta: {
@@ -82,14 +86,15 @@ module.exports = {
     },
     [abbreviation['projects']]: {
       meta: {
-        title: '标题',
+        title: '项目页标题',
         og_title: 'og标题',
-        keywords: '关键词',
+        keywords: '项目页关键词',
         og_url: '唯一link',
-        description: '描述',
+        description: '项目页描述',
         og_description: 'og描述',
-        og_image: '分享时的图片'
+        og_image: '项目页分享时的图片'
       },
+      projects: '项目',
     },
   }
 

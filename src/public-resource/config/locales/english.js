@@ -1,5 +1,4 @@
 const abbreviation = require('../abbreviation')
-const blog = require('./blog')
 
 module.exports = {
   topNav: {
@@ -7,9 +6,10 @@ module.exports = {
     home: 'Home',
     aboutU: 'About us',
     projects: 'Projects',
-    contactU: 'Contact us!'
+    contactU: 'Contact us'
   },
   footer: {
+    footer:'Footer',
     aboutU: 'About us ',
     projects: 'Projects',
     contactU: 'Contact Us ',
@@ -18,36 +18,39 @@ module.exports = {
   pages: {
     [abbreviation.index]: {
       meta: {
-        title: 'title here',
+        title: 'home page title here',
         og_title: 'og title here',
-        keywords: 'keywords here',
+        keywords: 'home page keywords here',
         og_url: 'canonical link here',
-        description: 'description here',
+        description: 'home page description here',
         og_description: 'og description here',
-        og_image: 'share image here'
+        og_image: 'home page share image here'
       },
+      home: 'Home',
     },
     [abbreviation['contact-us']]: {
       meta: {
-        title: 'title here',
+        title: 'contact page title here',
         og_title: 'og title here',
-        keywords: 'keywords here',
+        keywords: 'contact page keywords here',
         og_url: 'canonical link here',
-        description: 'description here',
+        description: 'contact page description here',
         og_description: 'og description here',
-        og_image: 'share image here'
+        og_image: 'contact page share image here'
       },
+      contactU: 'Contact us'
     },
     [abbreviation['about-us']]: {
       meta: {
-        title: 'title here',
+        title: 'About page title here',
         og_title: 'og title here',
-        keywords: 'keywords here',
+        keywords: 'About page keywords here',
         og_url: 'canonical link here',
-        description: 'description here',
+        description: 'About page description here',
         og_description: 'og description here',
-        og_image: 'share image here'
+        og_image: 'About page share image here'
       },
+      aboutU: 'About us',
     },
     [abbreviation['privacy-policy']]: {
       meta: {
@@ -59,6 +62,7 @@ module.exports = {
         og_description: 'og description here',
         og_image: 'share image here'
       },
+
     },
     [abbreviation['terms-and-conditions']]: {
       meta: {
@@ -84,14 +88,15 @@ module.exports = {
     },
     [abbreviation['projects']]: {
       meta: {
-        title: 'title here',
+        title: 'Projects page title here',
         og_title: 'og title here',
-        keywords: 'keywords here',
+        keywords: 'Projects page keywords here',
         og_url: 'canonical link here',
-        description: 'description here',
+        description: 'Projects page description here',
         og_description: 'og description here',
-        og_image: 'share image here'
+        og_image: 'Projects page share image here'
       },
+      projects: 'Projects',
     },
   }
 }
