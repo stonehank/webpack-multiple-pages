@@ -4,4 +4,3 @@ dist
 draft/
 image/
 .env
-copy-file

@@ -172,7 +172,7 @@ module.exports = {
             loader: 'ejs-loader',
           },
           {
-            test: /\.(png|jpe?g|gif|svg)$/,
+            test: /\.(png|jpe?g|gif|woff|woff2|eot|ttf|svg)$/,
             include: dirVars.assetsDir,
             use: [
               {
@@ -217,10 +217,7 @@ module.exports = {
     warnings: true,
     timings: true,
   },
-  watchOptions: {
-    aggregateTimeout: 2000,
-    poll: 3000
-  },
+
   devServer: isDev ? {
     overlay: true,
     noInfo: false,
