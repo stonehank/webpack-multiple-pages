@@ -1,3 +1,1 @@
-import 'commonPage'
-
-
+import 'commonPage';

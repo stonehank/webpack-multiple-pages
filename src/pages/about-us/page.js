@@ -1,3 +1,2 @@
-import 'commonPage'
-import './page.css'
-
+import 'commonPage';
+import './page.css';

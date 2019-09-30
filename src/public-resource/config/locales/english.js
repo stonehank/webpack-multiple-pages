@@ -1,4 +1,4 @@
-const abbreviation = require('../abbreviation')
+const abbreviation = require('../abbreviation');
 
 module.exports = {
   topNav: {
@@ -6,10 +6,10 @@ module.exports = {
     home: 'Home',
     aboutU: 'About us',
     projects: 'Projects',
-    contactU: 'Contact us'
+    contactU: 'Contact us',
   },
   footer: {
-    footer:'Footer',
+    footer: 'Footer',
     aboutU: 'About us ',
     projects: 'Projects',
     contactU: 'Contact Us ',
@@ -24,7 +24,7 @@ module.exports = {
         og_url: 'canonical link here',
         description: 'home page description here',
         og_description: 'og description here',
-        og_image: 'home page share image here'
+        og_image: 'home page share image here',
       },
       home: 'Home',
     },
@@ -36,9 +36,9 @@ module.exports = {
         og_url: 'canonical link here',
         description: 'contact page description here',
         og_description: 'og description here',
-        og_image: 'contact page share image here'
+        og_image: 'contact page share image here',
       },
-      contactU: 'Contact us'
+      contactU: 'Contact us',
     },
     [abbreviation['about-us']]: {
       meta: {
@@ -48,7 +48,7 @@ module.exports = {
         og_url: 'canonical link here',
         description: 'About page description here',
         og_description: 'og description here',
-        og_image: 'About page share image here'
+        og_image: 'About page share image here',
       },
       aboutU: 'About us',
     },
@@ -60,7 +60,7 @@ module.exports = {
         og_url: 'canonical link here',
         description: 'description here',
         og_description: 'og description here',
-        og_image: 'share image here'
+        og_image: 'share image here',
       },
 
     },
@@ -72,7 +72,7 @@ module.exports = {
         og_url: 'canonical link here',
         description: 'description here',
         og_description: 'og description here',
-        og_image: 'share image here'
+        og_image: 'share image here',
       },
     },
     [abbreviation['404']]: {
@@ -83,10 +83,10 @@ module.exports = {
         og_url: 'canonical link here',
         description: 'description here',
         og_description: 'og description here',
-        og_image: 'share image here'
+        og_image: 'share image here',
       },
     },
-    [abbreviation['projects']]: {
+    [abbreviation.projects]: {
       meta: {
         title: 'Projects page title here',
         og_title: 'og title here',
@@ -94,9 +94,9 @@ module.exports = {
         og_url: 'canonical link here',
         description: 'Projects page description here',
         og_description: 'og description here',
-        og_image: 'Projects page share image here'
+        og_image: 'Projects page share image here',
       },
       projects: 'Projects',
     },
-  }
-}
+  },
+};

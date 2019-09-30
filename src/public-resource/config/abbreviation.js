@@ -7,4 +7,4 @@ module.exports = {
   404: 'pageNotFound',
   'contact-us': 'contactUs',
   index: 'index',
-}
+};

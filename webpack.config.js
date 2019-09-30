@@ -106,15 +106,15 @@ module.exports = {
     rules: [
       {
         oneOf: [
-          // {
-          //   enforce: 'pre',
-          //   test: /\.js$/,
-          //   exclude: /(node_modules|src\/js|src\/css)/,
-          //   loader: 'eslint-loader',
-          //   options: {
-          //     fix: true
-          //   }
-          // },
+          {
+            enforce: 'pre',
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'eslint-loader',
+            // options: {
+              // fix: true
+            // }
+          },
           {
             test: /\.js$/,
             include: dirVars.srcRootDir,
@@ -209,10 +209,11 @@ module.exports = {
       }
     ],
   },
+
   stats: {
     all: false,
-    modules: true,
-    maxModules: 0,
+    children:true,
+    colors: true,
     errors: true,
     warnings: true,
     timings: true,
@@ -220,9 +221,9 @@ module.exports = {
 
   devServer: isDev ? {
     overlay: true,
-    noInfo: false,
+    noInfo: true,
     clientLogLevel: 'silent',
-    stats: 'errors-only',
+    // stats: 'normal',
     hot: true,
     port: 3000,
     host: getIP(),

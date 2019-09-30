@@ -1,19 +1,21 @@
 {
-  "extends": "standard",
+  "extends": "airbnb-base",
   "rules": {
-    "camelcase":0,
-    "no-prototype-builtins":0,
-    "promise/param-names":0,
-    "no-new":0,
-    "no-return-assign":0,
+    "camelcase":1,
     "no-unused-vars":1,
-    "prefer-const":1,
-    "space-infix-ops":1,
-    "key-spacing":1,
-    "comma-dangle":0,
-    "keyword-spacing":1,
-    "no-tabs": 0,
-    "no-mixed-spaces-and-tabs": 0
+    "import/no-unresolved": 0,
+    "semi":0
+//    "no-prototype-builtins":0,
+//    "promise/param-names":0,
+//    "no-new":0,
+//    "no-return-assign":0,
+//    "prefer-const":1,
+//    "space-infix-ops":1,
+//    "key-spacing":1,
+//    "comma-dangle":0,
+//    "keyword-spacing":1,
+//    "no-tabs": 0,
+//    "no-mixed-spaces-and-tabs": 0,
   },
   "env":{
     "jquery": true

@@ -1,15 +1,15 @@
-const layout = require('layout')
-const content = require('./html.ejs')
-const abbreviation = require('configDir/abbreviation')
+const layout = require('layout');
+const abbreviation = require('configDir/abbreviation');
+const content = require('./html.ejs');
 
-module.exports = function (templateParams) {
-  const language = templateParams.curLang
-  const publicPath = templateParams.publicPath
+module.exports = function buildPage(templateParams) {
+  const language = templateParams.curLang;
+  const { publicPath } = templateParams;
   return layout.run({
     content,
     language,
     publicPath,
-    page_locales_name: abbreviation['about-us'],
-    page_name:'about-us'
-  })
-}
+    pageLocalesName: abbreviation['about-us'],
+    pageName: 'about-us',
+  });
+};

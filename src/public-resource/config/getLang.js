@@ -1,11 +1,13 @@
 
-function getLang (language) {
+function getLang(language) {
   switch (language) {
     case 'en':
-      return 'en'
+      return 'en';
     case 'cn':
-      return 'zh-cmn-Hans'
+      return 'zh-cmn-Hans';
+    default:
+      return 'en';
   }
 }
 
-module.exports = getLang
+module.exports = getLang;
