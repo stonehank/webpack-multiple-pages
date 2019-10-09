@@ -111,9 +111,6 @@ module.exports = {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'eslint-loader',
-            // options: {
-              // fix: true
-            // }
           },
           {
             test: /\.js$/,
@@ -223,7 +220,6 @@ module.exports = {
     overlay: true,
     noInfo: true,
     clientLogLevel: 'silent',
-    // stats: 'normal',
     hot: true,
     port: 3000,
     host: getIP(),
