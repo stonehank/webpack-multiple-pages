@@ -1,15 +1,19 @@
-const layout = require('layout');
-const abbreviation = require('configDir/abbreviation');
-const content = require('./html.ejs');
+const layout = require('layout')
+
+const preContent=require('./content-pre.ejs')
+const content=require('./content.ejs')
+const affixContent=require('./content-affix.ejs')
 
 module.exports = function buildPage(templateParams) {
-  const language = templateParams.curLang;
-  const { publicPath } = templateParams;
+  const language = templateParams.curLang
+  const { publicPath,pageLocalesName,folderLocalesName } = templateParams
   return layout.run({
+    preContent,
     content,
+    affixContent,
     language,
     publicPath,
-    pageLocalesName: abbreviation.index,
-    pageName: 'index',
-  });
-};
+    pageLocalesName,
+    folderLocalesName,
+  })
+}

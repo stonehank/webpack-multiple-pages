@@ -28,7 +28,9 @@ const configPlugins = [
   new WebpackBar(),
   new CopyPlugin(
     isDev
-      ? []
+      ? [
+        { from: 'copy-file', to: '' },
+      ]
       : [
         { from: 'public', to: 'static' },
         { from: 'copy-file', to: '' },
@@ -74,7 +76,9 @@ flatFolders.forEach((page) => {
       cache: true,
       templateParameters: {
         curLang: lang,
-        publicPath: publicPath
+        publicPath: publicPath,
+        folderLocalesName:null,
+        pageLocalesName:abbreviation[page]
       },
       chunks: [abbreviation[page], 'commons', 'libs', 'manifest']
     })
@@ -102,7 +106,9 @@ deepFolders.forEach((page) => {
       cache: true,
       templateParameters: {
         curLang: lang,
-        publicPath: publicPath
+        publicPath: publicPath,
+        folderLocalesName:abbreviation[folderName],
+        pageLocalesName:abbreviation[pageName]
       },
       chunks: chunks
     })
@@ -121,7 +127,9 @@ notTransFlat.forEach((page) => {
     cache: true,
     templateParameters: {
       curLang: 'en',
-      publicPath: publicPath
+      publicPath: publicPath,
+      folderLocalesName:null,
+      pageLocalesName:abbreviation[pageName]
     },
     chunks: [abbreviation[pageName], 'commons', 'libs', 'manifest']
   })
@@ -141,7 +149,9 @@ notTransDeep.forEach((page) => {
     cache: true,
     templateParameters: {
       curLang: 'en',
-      publicPath: publicPath
+      publicPath: publicPath,
+      folderLocalesName:abbreviation[folderName],
+      pageLocalesName:abbreviation[pageName]
     },
     chunks
   })

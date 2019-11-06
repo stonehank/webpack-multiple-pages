@@ -1,4 +1,4 @@
-const abbreviation = require('../abbreviation');
+const abbreviation = require('../abbreviation')
 
 module.exports = {
   topNav: {
@@ -7,6 +7,10 @@ module.exports = {
     aboutU: '关于',
     projects: '项目',
     contactU: '联系我们',
+    services:'服务',
+    subSer1:'服务子项1',
+    subSer2:'服务子项2',
+    subSer3:'服务子项3',
   },
   footer: {
     footer: '页脚',
@@ -26,7 +30,7 @@ module.exports = {
         og_description: 'og描述',
         og_image: '首页分享时的图片',
       },
-      home: '主页',
+      title: '主页',
     },
     [abbreviation['contact-us']]: {
       meta: {
@@ -38,7 +42,7 @@ module.exports = {
         og_description: 'og描述',
         og_image: '联系页面分享时的图片',
       },
-      contactU: '联系我们',
+      title: '联系我们',
     },
     [abbreviation['about-us']]: {
       meta: {
@@ -50,7 +54,7 @@ module.exports = {
         og_description: 'og描述',
         og_image: '关于页面分享时的图片',
       },
-      aboutU: '关于我们',
+      title: '关于我们',
     },
     [abbreviation['privacy-policy']]: {
       meta: {
@@ -95,8 +99,58 @@ module.exports = {
         og_description: 'og描述',
         og_image: '项目页分享时的图片',
       },
-      projects: '项目',
+      title: '项目',
+    },
+    [abbreviation.services]: {
+      [abbreviation.index]:{
+        meta: {
+          title: '服务',
+          og_title: '服务',
+          keywords: '',
+          og_url: '',
+          description: '',
+          og_description: '',
+          og_image: '',
+        },
+        title:'服务'
+      },
+      [abbreviation['sub-services-1']]: {
+        meta: {
+          title: '服务子项1',
+          og_title: '服务子项1',
+          keywords: '',
+          og_url: '',
+          description: '',
+          og_description: '',
+          og_image: '',
+        },
+        title:'服务子项1'
+      },
+      [abbreviation['sub-services-2']]: {
+        meta: {
+          title: '服务子项2',
+          og_title: '服务子项2',
+          keywords: '',
+          og_url: '',
+          description: '',
+          og_description: '',
+          og_image: '',
+        },
+        title:'服务子项2'
+      },
+      [abbreviation['sub-services-3']]: {
+        meta: {
+          title: '服务子项3',
+          og_title: '服务子项3',
+          keywords: '',
+          og_url: '',
+          description: '',
+          og_description: '',
+          og_image: '',
+        },
+        title:'服务子项3'
+      },
     },
   },
 
-};
+}

@@ -111,6 +111,9 @@ module.exports = {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'eslint-loader',
+            options: {
+              fix: true,
+            },
           },
           {
             test: /\.js$/,
@@ -169,7 +172,7 @@ module.exports = {
             loader: 'ejs-loader',
           },
           {
-            test: /\.(png|jpe?g|gif|woff|woff2|eot|ttf|svg)$/,
+            test: /\.(png|jpe?g|gif)$/,
             include: dirVars.assetsDir,
             use: [
               {
@@ -182,6 +185,31 @@ module.exports = {
               },
             ],
           },
+
+          {
+            test: /\.(woff|woff2|eot|ttf)$/,
+            include: dirVars.assetsDir,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: 'font/[name]-[contenthash:8].[ext]',
+                },
+              },
+            ],
+          },
+          {
+            test: /\.svg$/,
+            include: dirVars.assetsDir,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: 'vector/[name]-[contenthash:8].[ext]',
+                },
+              },
+            ],
+          },
           {
             test: /\.ico$/,
             include: dirVars.assetsDir,
@@ -190,7 +218,6 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                   name: 'image/[name].[ext]',
-                  publicPath: '/'
                 },
               },
             ],
