@@ -51,8 +51,12 @@ const configPlugins = [
     filename: isDev ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
     chunkFilename: isDev ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
   }),
+  // use for clean unused css, if happen some css miss, please update or remove it.
   !isDev && new PurgecssPlugin({
-    paths: glob.sync(`${dirVars.srcRootDir}/**/*.?(ejs|js)`, { nodir: true }),
+    paths: glob.sync([
+      `${dirVars.srcRootDir}/**/*.?(ejs|js)`,
+      `${dirVars.staticRootDir}/copy-file/js/*.?(ejs|js)`,
+    ], { nodir: true }),
   }),
   new ScriptExtHtmlWebpackPlugin({
     defaultAttribute: 'defer'
