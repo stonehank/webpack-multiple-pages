@@ -25,7 +25,7 @@ const moduleExports = {
       header: header({ htmlLang: metaConfig.lang, language }),
       meta: meta(metaConfig),
       footer: footerTemp,
-      topNav: topNav({ lang: curLang.topNav, publicPath, language }),
+      topNav: topNav({ lang: curLang.topNav, publicPath, language, pageLocalesName, folderLocalesName}),
       externalLinks: externalLinks(),
       preContent: preContent({
         lang: curPageLang, publicPath, language, formLang,

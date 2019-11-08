@@ -1,15 +1,15 @@
 const glob = require('glob')
 const dirVars = require('./dir-vars.config.js')
-const { notTrans_prefix, deepFolder_prefix } = require('../config')
+const { notTransPrefix, deepFolderPrefix } = require('../config')
 const options = {
   cwd: dirVars.pagesDir, // 在pages目录里找
   sync: true, // 这里不能异步，只能同步
 }
-const flatFolders = new glob.Glob(`!(${notTrans_prefix}|${deepFolder_prefix}|_)*`, options) // 考虑到多个页面共用HTML等资源的情况，跳过以`_`开头的目录
-const deepFolders = new glob.Glob(`${deepFolder_prefix}*/[^_]*`, options)
+const flatFolders = new glob.Glob(`!(${notTransPrefix}|${deepFolderPrefix}|_)*`, options) // 考虑到多个页面共用HTML等资源的情况，跳过以`_`开头的目录
+const deepFolders = new glob.Glob(`${deepFolderPrefix}*/[^_]*`, options)
 
-const notTransFlat = new glob.Glob(`${notTrans_prefix}!(${deepFolder_prefix}|_)*`, options)
-const notTransDeep = new glob.Glob(`${notTrans_prefix}${deepFolder_prefix}*/[^_]*`, options)
+const notTransFlat = new glob.Glob(`${notTransPrefix}!(${deepFolderPrefix}|_)*`, options)
+const notTransDeep = new glob.Glob(`${notTransPrefix}${deepFolderPrefix}*/[^_]*`, options)
 
 
 let finalFlatFolders = flatFolders.found

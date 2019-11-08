@@ -7,6 +7,42 @@ const isDev = process.env.NODE_ENV === 'development'
 const dirVars = require('./webpack-config/base/dir-vars.config.js')
 const { publicPath } = require('./webpack-config/config')
 
+function parseCss(preLoader=1){
+  return [
+    { loader: MiniCssExtractPlugin.loader },
+    {
+      loader: 'css-loader',
+      options: {
+        // 开启css中的图片打包功能
+        url: true,
+        importLoaders: preLoader,
+        sourceMap: isDev
+      }
+    },
+    // All the rules in postcss.config.js
+    {
+      loader: 'postcss-loader',
+      options: {
+        ident: 'postcss',
+        config: {
+          ctx: {
+            'postcss-preset-env': {
+              autoprefixer: {
+                flexbox: 'no-2009',
+              },
+              stage: 3
+            },
+            'postcss-flexbugs-fixes': {},
+            cssnano: {},
+          }
+        }
+      }
+    },
+  ]
+}
+
+
+
 module.exports = {
   mode: isDev ? 'development' : 'production',
   entry: require('./webpack-config/entry.config.js'),
@@ -29,8 +65,6 @@ module.exports = {
       jsDir: dirVars.jsDir,
       /* img */
       imageDir: dirVars.imageDir,
-
-
 
       /* components */
       componentsDir: dirVars.componentsDir,
@@ -129,41 +163,13 @@ module.exports = {
           },
 
           {
-            test: /\.s?css$/,
-            use: [
-              { loader: MiniCssExtractPlugin.loader },
-              {
-                loader: 'css-loader',
-                options: {
-                  // 开启css中的图片打包功能
-                  url: true,
-                  importLoaders: 2,
-                  sourceMap: isDev
-                }
-              },
-              // All the rules in postcss.config.js
-              {
-                loader: 'postcss-loader',
-                options: {
-                  ident: 'postcss',
-                  config: {
-                    ctx: {
-                      'postcss-preset-env': {
-                        autoprefixer: {
-                          flexbox: 'no-2009',
-                        },
-                        stage: 3
-                      },
-                      'postcss-flexbugs-fixes': {},
-                      cssnano: {},
-                    }
-                  }
-                }
-              },
-              {
-                loader: 'sass-loader',
-              }
-            ],
+            test: /\.css$/,
+            use: parseCss()
+          },
+
+          {
+            test: /\.scss$/,
+            use: parseCss(2).concat({loader: 'sass-loader'})
           },
           {
             test: /\.ejs$/,

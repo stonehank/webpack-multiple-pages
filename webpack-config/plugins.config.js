@@ -1,10 +1,10 @@
 const webpack = require('webpack')
 const path = require('path')
-// const os = require('os')
+
 const glob = require('glob')
 const dirVars = require('./base/dir-vars.config.js')
 const { flatFolders, deepFolders, notTransFlat, notTransDeep } = require('./base/page-entries.config.js')
-const { publicPath, deepFolder_prefix, notTrans_prefix } = require('./config')
+const { publicPath, deepFolderPrefix, notTransPrefix } = require('./config')
 const abbreviation = require('../src/public-resource/config/abbreviation')
 const langList = require('../src/public-resource/config/config').langList
 
@@ -87,7 +87,7 @@ flatFolders.forEach((page) => {
 })
 
 deepFolders.forEach((page) => {
-  const deepPage = page.substring(deepFolder_prefix.length)
+  const deepPage = page.substring(deepFolderPrefix.length)
   const split = deepPage.split('/')
   const folderName = split[0]
   const pageName = split[1]
@@ -117,7 +117,7 @@ deepFolders.forEach((page) => {
 })
 
 notTransFlat.forEach((page) => {
-  const pageName = page.substring(notTrans_prefix.length)
+  const pageName = page.substring(notTransPrefix.length)
   let outputFilename = `./${pageName}.html`
   if (pageName === '404')outputFilename = `./${pageName}.shtml`
   const htmlPlugin_en = new HtmlWebpackPlugin({
@@ -137,7 +137,7 @@ notTransFlat.forEach((page) => {
 })
 
 notTransDeep.forEach((page) => {
-  const ntDeepPage = page.substring(notTrans_prefix.length + deepFolder_prefix.length)
+  const ntDeepPage = page.substring(notTransPrefix.length + deepFolderPrefix.length)
   const split = ntDeepPage.split('/')
   const folderName = split[0]
   const pageName = split[1]
