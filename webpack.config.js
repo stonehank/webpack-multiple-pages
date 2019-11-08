@@ -56,7 +56,7 @@ module.exports = {
     extensions: ['.js'],
     alias: {
 
-      configDir: dirVars.configDir,
+      localesDir: dirVars.localesDir,
       vendorDir: dirVars.vendorDir,
 
       assetsDir: dirVars.assetsDir,

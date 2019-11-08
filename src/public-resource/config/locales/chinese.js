@@ -1,4 +1,3 @@
-const abbreviation = require('../abbreviation')
 
 module.exports = {
   topNav: {
@@ -20,7 +19,7 @@ module.exports = {
     contactU: '联系我们',
   },
   pages: {
-    [abbreviation.index]: {
+    index: {
       meta: {
         title: '首页标题',
         og_title: 'og标题',
@@ -32,7 +31,7 @@ module.exports = {
       },
       title: '主页',
     },
-    [abbreviation['contact-us']]: {
+    'contact-us': {
       meta: {
         title: '联系页面标题',
         og_title: 'og标题',
@@ -44,7 +43,7 @@ module.exports = {
       },
       title: '联系我们',
     },
-    [abbreviation['about-us']]: {
+    'about-us': {
       meta: {
         title: '关于页面标题',
         og_title: 'og标题',
@@ -56,7 +55,7 @@ module.exports = {
       },
       title: '关于我们',
     },
-    [abbreviation['privacy-policy']]: {
+    'privacy-policy': {
       meta: {
         title: '标题',
         og_title: 'og标题',
@@ -67,7 +66,7 @@ module.exports = {
         og_image: '分享时的图片',
       },
     },
-    [abbreviation['terms-and-conditions']]: {
+    'terms-and-conditions': {
       meta: {
         title: '标题',
         og_title: 'og标题',
@@ -78,7 +77,7 @@ module.exports = {
         og_image: '分享时的图片',
       },
     },
-    [abbreviation['404']]: {
+    404: {
       meta: {
         title: '标题',
         og_title: 'og标题',
@@ -89,7 +88,7 @@ module.exports = {
         og_image: '分享时的图片',
       },
     },
-    [abbreviation.projects]: {
+    projects: {
       meta: {
         title: '项目页标题',
         og_title: 'og标题',
@@ -101,8 +100,8 @@ module.exports = {
       },
       title: '项目',
     },
-    [abbreviation.services]: {
-      [abbreviation.index]:{
+    services: {
+      index:{
         meta: {
           title: '服务',
           og_title: '服务',
@@ -114,7 +113,7 @@ module.exports = {
         },
         title:'服务'
       },
-      [abbreviation['sub-services-1']]: {
+      'sub-services-1': {
         meta: {
           title: '服务子项1',
           og_title: '服务子项1',
@@ -126,7 +125,7 @@ module.exports = {
         },
         title:'服务子项1'
       },
-      [abbreviation['sub-services-2']]: {
+      'sub-services-2': {
         meta: {
           title: '服务子项2',
           og_title: '服务子项2',
@@ -138,7 +137,7 @@ module.exports = {
         },
         title:'服务子项2'
       },
-      [abbreviation['sub-services-3']]: {
+      'sub-services-3': {
         meta: {
           title: '服务子项3',
           og_title: '服务子项3',

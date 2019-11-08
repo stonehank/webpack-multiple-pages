@@ -1,5 +1,3 @@
-const abbreviation = require('../abbreviation')
-
 
 /*
  meta: {
@@ -33,7 +31,7 @@ module.exports = {
     privPol: 'Privacy Policy ',
   },
   pages: {
-    [abbreviation.index]: {
+    index: {
       meta: {
         title: 'Home',
         og_title: 'Home',
@@ -45,7 +43,7 @@ module.exports = {
       },
       title: 'Home',
     },
-    [abbreviation['contact-us']]: {
+    'contact-us': {
       meta: {
         title: 'Contact Us',
         og_title: 'Contact Us',
@@ -57,7 +55,7 @@ module.exports = {
       },
       title: 'Contact us',
     },
-    [abbreviation['about-us']]: {
+    'about-us': {
       meta: {
         title: 'About Us',
         og_title: 'About Us',
@@ -69,7 +67,7 @@ module.exports = {
       },
       title: 'About us',
     },
-    [abbreviation['privacy-policy']]: {
+    'privacy-policy': {
       meta: {
         title: 'title here',
         og_title: 'og title here',
@@ -80,7 +78,7 @@ module.exports = {
         og_image: '',
       },
     },
-    [abbreviation['terms-and-conditions']]: {
+    'terms-and-conditions': {
       meta: {
         title: 'title here',
         og_title: 'og title here',
@@ -91,7 +89,7 @@ module.exports = {
         og_image: '',
       },
     },
-    [abbreviation['404']]: {
+    404: {
       meta: {
         title: '404',
         og_title: '404',
@@ -102,7 +100,7 @@ module.exports = {
         og_image: '',
       },
     },
-    [abbreviation.projects]: {
+    projects: {
       meta: {
         title: 'Projects',
         og_title: 'Projects',
@@ -114,8 +112,8 @@ module.exports = {
       },
       title: 'Projects',
     },
-    [abbreviation.services]: {
-      [abbreviation.index]:{
+    services: {
+      index:{
         meta: {
           title: 'Services',
           og_title: 'Services',
@@ -127,7 +125,7 @@ module.exports = {
         },
         title:'Services'
       },
-      [abbreviation['sub-services-1']]: {
+      'sub-services-1': {
         meta: {
           title: 'Sub Services 1',
           og_title: 'Sub Services 1',
@@ -139,7 +137,7 @@ module.exports = {
         },
         title:'Sub Services 1'
       },
-      [abbreviation['sub-services-2']]: {
+      'sub-services-2': {
         meta: {
           title: 'Sub Services 2',
           og_title: 'Sub Services 2',
@@ -151,7 +149,7 @@ module.exports = {
         },
         title:'Sub Services 2'
       },
-      [abbreviation['sub-services-3']]: {
+      'sub-services-3': {
         meta: {
           title: 'Sub Services 3',
           og_title: 'Sub Services 3',

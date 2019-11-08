@@ -1,12 +1,11 @@
 const webpack = require('webpack')
 const path = require('path')
 
-const glob = require('glob')
+const glob = require('glob-all')
 const dirVars = require('./base/dir-vars.config.js')
 const { flatFolders, deepFolders, notTransFlat, notTransDeep } = require('./base/page-entries.config.js')
 const { publicPath, deepFolderPrefix, notTransPrefix } = require('./config')
-const abbreviation = require('../src/public-resource/config/abbreviation')
-const langList = require('../src/public-resource/config/config').langList
+const {primaryLang,otherLangList} = require('../src/public-resource/config/config')
 
 const WebpackBar = require('webpackbar')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -18,7 +17,8 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const PurgecssPlugin = require('purgecss-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 
-
+otherLangList.unshift(primaryLang)
+const allLangList=otherLangList
 const isDev = process.env.NODE_ENV === 'development'
 
 const configPlugins = [
@@ -51,7 +51,12 @@ const configPlugins = [
     filename: isDev ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
     chunkFilename: isDev ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
   }),
-  // use for clean unused css, if happen some css miss, please update or remove it.
+  /*
+  * !!!
+  * use for clean unused css, if your files which includes css style is not in src folder,
+  * maybe need to update here, or just remove it.
+  * */
+
   !isDev && new PurgecssPlugin({
     paths: glob.sync([
       `${dirVars.srcRootDir}/**/*.?(ejs|js)`,
@@ -67,7 +72,7 @@ const configPlugins = [
 flatFolders.forEach((page) => {
   let filename = ''
   // 定义filename路径
-  langList.forEach(lang => {
+  allLangList.forEach(lang => {
     if (lang === 'en') {
       filename = `./${page}.html`
     } else {
@@ -82,9 +87,9 @@ flatFolders.forEach((page) => {
         curLang: lang,
         publicPath: publicPath,
         folderLocalesName:null,
-        pageLocalesName:abbreviation[page]
+        pageLocalesName:page
       },
-      chunks: [abbreviation[page], 'commons', 'libs', 'manifest']
+      chunks: [page, 'commons', 'libs', 'manifest']
     })
     configPlugins.unshift(htmlPlugin)
   })
@@ -96,9 +101,9 @@ deepFolders.forEach((page) => {
   const folderName = split[0]
   const pageName = split[1]
   let filename = ''
-  const chunks = [abbreviation[folderName] + '_' + abbreviation[pageName], 'commons', 'libs', 'manifest']
-  langList.forEach(lang => {
-    if (lang === 'en') {
+  const chunks = [folderName + '_' + pageName, 'commons', 'libs', 'manifest']
+  allLangList.forEach(lang => {
+    if (lang === primaryLang) {
       filename = `./${deepPage}.html`
     } else {
       filename = `./${lang}/${deepPage}.html`
@@ -111,8 +116,8 @@ deepFolders.forEach((page) => {
       templateParameters: {
         curLang: lang,
         publicPath: publicPath,
-        folderLocalesName:abbreviation[folderName],
-        pageLocalesName:abbreviation[pageName]
+        folderLocalesName:folderName,
+        pageLocalesName:pageName
       },
       chunks: chunks
     })
@@ -124,20 +129,20 @@ notTransFlat.forEach((page) => {
   const pageName = page.substring(notTransPrefix.length)
   let outputFilename = `./${pageName}.html`
   if (pageName === '404')outputFilename = `./${pageName}.shtml`
-  const htmlPlugin_en = new HtmlWebpackPlugin({
+  const htmlPluginPrimaryLang = new HtmlWebpackPlugin({
     filename: outputFilename,
     template: path.resolve(dirVars.pagesDir, `./${page}/html.js`),
     inject: true,
     cache: true,
     templateParameters: {
-      curLang: 'en',
+      curLang: primaryLang,
       publicPath: publicPath,
       folderLocalesName:null,
-      pageLocalesName:abbreviation[pageName]
+      pageLocalesName:pageName
     },
-    chunks: [abbreviation[pageName], 'commons', 'libs', 'manifest']
+    chunks: [pageName, 'commons', 'libs', 'manifest']
   })
-  configPlugins.unshift(htmlPlugin_en)
+  configPlugins.unshift(htmlPluginPrimaryLang)
 })
 
 notTransDeep.forEach((page) => {
@@ -145,21 +150,21 @@ notTransDeep.forEach((page) => {
   const split = ntDeepPage.split('/')
   const folderName = split[0]
   const pageName = split[1]
-  const chunks = [abbreviation[folderName] + '_' + abbreviation[pageName], 'commons', 'libs', 'manifest']
-  const htmlPlugin_en = new HtmlWebpackPlugin({
+  const chunks = [folderName + '_' + pageName, 'commons', 'libs', 'manifest']
+  const htmlPluginPrimaryLang = new HtmlWebpackPlugin({
     filename: `./${ntDeepPage}.html`,
     template: path.resolve(dirVars.pagesDir, `./${page}/html.js`),
     inject: true,
     cache: true,
     templateParameters: {
-      curLang: 'en',
+      curLang: primaryLang,
       publicPath: publicPath,
-      folderLocalesName:abbreviation[folderName],
-      pageLocalesName:abbreviation[pageName]
+      folderLocalesName:folderName,
+      pageLocalesName:pageName
     },
     chunks
   })
-  configPlugins.unshift(htmlPlugin_en)
+  configPlugins.unshift(htmlPluginPrimaryLang)
 })
 
 module.exports = configPlugins.filter(Boolean)

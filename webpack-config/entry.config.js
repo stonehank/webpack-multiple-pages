@@ -1,25 +1,24 @@
 const path = require('path')
 const dirVars = require('./base/dir-vars.config.js')
 const { flatFolders, deepFolders, notTransFlat, notTransDeep } = require('./base/page-entries.config.js')
-const abbreviation = require('../src/public-resource/config/abbreviation')
 const { deepFolderPrefix, notTransPrefix } = require('./config')
 const configEntry = {}
 
 flatFolders.forEach((page) => {
-  configEntry[abbreviation[page]] = path.resolve(dirVars.pagesDir, page + '/page.js')
+  configEntry[page] = path.resolve(dirVars.pagesDir, page + '/page.js')
 })
 deepFolders.forEach((page) => {
   const deepPage = page.substring(deepFolderPrefix.length)
   const split = deepPage.split('/')
   const folderName = split[0]
   const pageName = split[1]
-  const abbName = `${abbreviation[folderName]}_${abbreviation[pageName]}`
+  const abbName = `${folderName}_${pageName}`
   configEntry[abbName] = path.resolve(dirVars.pagesDir, page + '/page.js')
 })
 
 notTransFlat.forEach((page) => {
   const pageName = page.substring(notTransPrefix.length)
-  configEntry[abbreviation[pageName]] = path.resolve(dirVars.pagesDir, page + '/page.js')
+  configEntry[pageName] = path.resolve(dirVars.pagesDir, page + '/page.js')
 })
 
 notTransDeep.forEach((page) => {
@@ -27,7 +26,7 @@ notTransDeep.forEach((page) => {
   const split = ntDeepPage.split('/')
   const folderName = split[0]
   const pageName = split[1]
-  const abbName = `${abbreviation[folderName]}_${abbreviation[pageName]}`
+  const abbName = `${folderName}_${pageName}`
   configEntry[abbName] = path.resolve(dirVars.pagesDir, page + '/page.js')
 })
 

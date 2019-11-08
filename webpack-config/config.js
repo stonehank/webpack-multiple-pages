@@ -3,4 +3,5 @@ module.exports={
   publicPath: '',
   deepFolderPrefix: 'folder-',
   notTransPrefix: 'not-translate-',
+  notPagePrefix:'_'
 }

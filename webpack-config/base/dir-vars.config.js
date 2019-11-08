@@ -17,8 +17,8 @@ moduleExports.publicDir = path.resolve(moduleExports.srcRootDir, './public-resou
 moduleExports.logicDir = path.resolve(moduleExports.publicDir, './logic') // 存放公用的业务逻辑
 moduleExports.libsDir = path.resolve(moduleExports.publicDir, './libs');  // 与业务逻辑无关的库都可以放到这里
 
-moduleExports.configDir = path.resolve(moduleExports.publicDir, './config') // 存放各种配置文件
-moduleExports.localesDir = path.resolve(moduleExports.configDir, './locales') // 存放语言配置
+moduleExports.localesDir = path.resolve(moduleExports.publicDir, './config') // 存放语言配置文件
+
 
 moduleExports.componentsDir = path.resolve(moduleExports.publicDir, './components') // 存放组件，可以是纯HTML，也可以包含js/css/image等，看自己需要
 moduleExports.layoutDir = path.resolve(moduleExports.publicDir, './layout') // 存放UI布局，组织各个组件拼起来，因应需要可以有不同的布局套路
