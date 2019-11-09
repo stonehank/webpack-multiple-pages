@@ -41,8 +41,6 @@ function parseCss(preLoader=1){
   ]
 }
 
-
-
 module.exports = {
   mode: isDev ? 'development' : 'production',
   entry: require('./webpack-config/entry.config.js'),
