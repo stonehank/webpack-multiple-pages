@@ -7,7 +7,7 @@ moduleExports.srcRootDir = path.resolve(moduleExports.staticRootDir, './src') //
 moduleExports.vendorDir = path.resolve(moduleExports.staticRootDir, './vendor') // 存放所有不能用npm管理的第三方库
 
 moduleExports.assetsDir = path.resolve(moduleExports.srcRootDir, './assets') // 存放资源
-moduleExports.imageDir=path.resolve(moduleExports.assetsDir,'./image') // 存放图片
+moduleExports.imageDir=path.resolve(moduleExports.assetsDir,'./images') // 存放图片
 moduleExports.cssDir = path.resolve(moduleExports.assetsDir, './css') // 存放公用css
 moduleExports.jsDir = path.resolve(moduleExports.assetsDir, './js') // 存放公用js
 
