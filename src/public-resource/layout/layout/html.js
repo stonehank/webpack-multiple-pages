@@ -7,7 +7,15 @@ const externalLinks = require('componentsDir/external-links/html.ejs')
 const scrollTop = require('componentsDir/scrollTop/html.ejs')
 const isoCode=require('localesDir/config').isoCode
 const layout = require('./html.ejs')
-
+const defaultMeta=(title) => ({
+  title,
+  og_title: '',
+  keywords: '',
+  og_url: '',
+  description: '',
+  og_description: '',
+  og_image: '',
+})
 
 const moduleExports = {
   run({
@@ -15,8 +23,25 @@ const moduleExports = {
   }={}) {
     const curLang = locales[language]
     let curPageLang
-    if(folderLocalesName)curPageLang=curLang.pages[folderLocalesName][pageLocalesName]
-    else curPageLang = curLang.pages[pageLocalesName]
+    if(folderLocalesName){
+      if(!curLang.pages[folderLocalesName]){
+        curLang.pages[folderLocalesName]={
+          [pageLocalesName]:{
+            meta:defaultMeta(pageLocalesName)
+          }
+        }
+      }
+      curPageLang=curLang.pages[folderLocalesName][pageLocalesName]
+    } else {
+      if(!curLang.pages[pageLocalesName]){
+        curLang.pages[pageLocalesName]={
+          meta:defaultMeta(pageLocalesName)
+        }
+      }
+      curPageLang = curLang.pages[pageLocalesName]
+    }
+    // if(folderLocalesName)curPageLang=curLang.pages[folderLocalesName][pageLocalesName]
+    // else curPageLang = curLang.pages[pageLocalesName]
     const metaConfig = curPageLang.meta
     metaConfig.lang = isoCode[language]
     const formLang = null
