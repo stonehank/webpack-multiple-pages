@@ -5,7 +5,7 @@ const { deepFolderPrefix, notTransPrefix } = require('./config')
 const configEntry = {}
 
 flatFolders.forEach((page) => {
-  configEntry[page] = path.resolve(dirVars.pagesDir, page + '/page.js')
+  configEntry[page] = path.resolve(dirVars.pagesDir, page + '/src/index.js')
 })
 deepFolders.forEach((page) => {
   const deepPage = page.substring(deepFolderPrefix.length)
@@ -13,12 +13,12 @@ deepFolders.forEach((page) => {
   const folderName = split[0]
   const pageName = split[1]
   const abbName = `${folderName}_${pageName}`
-  configEntry[abbName] = path.resolve(dirVars.pagesDir, page + '/page.js')
+  configEntry[abbName] = path.resolve(dirVars.pagesDir, page + '/src/index.js')
 })
 
 notTransFlat.forEach((page) => {
   const pageName = page.substring(notTransPrefix.length)
-  configEntry[pageName] = path.resolve(dirVars.pagesDir, page + '/page.js')
+  configEntry[pageName] = path.resolve(dirVars.pagesDir, page + '/src/index.js')
 })
 
 notTransDeep.forEach((page) => {
@@ -27,7 +27,7 @@ notTransDeep.forEach((page) => {
   const folderName = split[0]
   const pageName = split[1]
   const abbName = `${folderName}_${pageName}`
-  configEntry[abbName] = path.resolve(dirVars.pagesDir, page + '/page.js')
+  configEntry[abbName] = path.resolve(dirVars.pagesDir, page + '/src/index.js')
 })
 
 module.exports = configEntry

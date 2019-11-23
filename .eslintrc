@@ -1,5 +1,6 @@
 {
-  "extends": "airbnb-base",
+  "extends": "react-app",
+  "parser": "babel-eslint",
   "rules": {
     "comma-dangle": 0,
     "import/no-dynamic-require": 0,
@@ -46,7 +47,8 @@
     "no-shadow":0
   },
   "env":{
-    "jquery": true
+    "jquery": true,
+    "es6": true
   },
   "globals": {
     "anime": true

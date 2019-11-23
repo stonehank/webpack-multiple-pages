@@ -138,26 +138,35 @@ module.exports = {
     rules: [
       {
         oneOf: [
+          // {
+          //   enforce: 'pre',
+          //   test: /\.(js|jsx)$/,
+          //   exclude: /node_modules/,
+          //   include: dirVars.srcRootDir,
+          //   loader: 'eslint-loader',
+          //   options: {
+          //     fix: true,
+          //   },
+          // },
           {
-            enforce: 'pre',
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: 'eslint-loader',
-            options: {
-              fix: true,
-            },
-          },
-          {
-            test: /\.js$/,
+            test: /\.(js|jsx)$/,
             include: dirVars.srcRootDir,
             exclude: /node_modules/,
-            use: {
-              loader: 'babel-loader',
-              options: {
-                cacheDirectory: true,
-                babelrc: true,
+            use: [
+              {
+                loader: 'babel-loader',
+                options: {
+                  cacheDirectory: true,
+                  babelrc: true,
+                }
+              },
+              {
+                loader: 'eslint-loader',
+                options: {
+                  fix:true
+                }
               }
-            }
+            ]
           },
 
           {
