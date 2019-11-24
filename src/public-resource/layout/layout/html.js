@@ -1,21 +1,12 @@
-const locales = require('localesDir/locales')
+const locales = require('localesDir')
 const header = require('componentsDir/header/html.ejs')
 const meta = require('componentsDir/meta/html.ejs')
 const topNav = require('componentsDir/top-nav/html.ejs')
 const footer = require('componentsDir/footer/html.ejs')
 const externalLinks = require('componentsDir/external-links/html.ejs')
 const scrollTop = require('componentsDir/scrollTop/html.ejs')
-const isoCode=require('localesDir/config').isoCode
+const {isoCode,createDefaultMeta}=require('localesDir/config')
 const layout = require('./html.ejs')
-const defaultMeta=(title) => ({
-  title,
-  og_title: '',
-  keywords: '',
-  og_url: '',
-  description: '',
-  og_description: '',
-  og_image: '',
-})
 
 const moduleExports = {
   run({
@@ -23,11 +14,12 @@ const moduleExports = {
   }={}) {
     const curLang = locales[language]
     let curPageLang
+    let defaultMeta=createDefaultMeta(pageLocalesName)
     if(folderLocalesName){
       if(!curLang.pages[folderLocalesName]){
         curLang.pages[folderLocalesName]={
           [pageLocalesName]:{
-            meta:defaultMeta(pageLocalesName)
+            meta:defaultMeta
           }
         }
       }
@@ -35,7 +27,7 @@ const moduleExports = {
     } else {
       if(!curLang.pages[pageLocalesName]){
         curLang.pages[pageLocalesName]={
-          meta:defaultMeta(pageLocalesName)
+          meta:defaultMeta
         }
       }
       curPageLang = curLang.pages[pageLocalesName]

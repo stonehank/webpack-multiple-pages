@@ -5,7 +5,7 @@ const glob = require('glob-all')
 const dirVars = require('./base/dir-vars.config.js')
 const { flatFolders, deepFolders, notTransFlat, notTransDeep } = require('./base/page-entries.config.js')
 const { publicPath, deepFolderPrefix, notTransPrefix } = require('./config')
-const {primaryLang,otherLangList} = require('../src/public-resource/config/config')
+const {primaryLang,otherLangList} = require('./locales/config')
 
 const WebpackBar = require('webpackbar')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
