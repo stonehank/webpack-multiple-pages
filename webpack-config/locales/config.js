@@ -10,13 +10,24 @@ module.exports={
     cn:'zh-cmn-Hans'
   },
   langPanelExcludes: ['privacy-policy', 'terms-and-conditions', '404'],
-  createDefaultMeta:(title)=>({
-    title,
-    og_title: title,
-    keywords: '',
-    og_url: '',
-    description: '',
-    og_description: '',
-    og_image: ''
-  })
+  createDefaultMeta(folder1,folder2,page,author){
+    let title=page
+    if(page==='index'){
+      if(folder2){
+        title=folder2
+      }else if(folder1){
+        title=folder1
+      }
+    }
+    return {
+      title,
+      og_title: title,
+      keywords: '',
+      og_url: '',
+      description: '',
+      og_description: '',
+      og_image: '',
+      author,
+    }
+  }
 }

@@ -8,52 +8,84 @@ const scrollTop = require('componentsDir/scrollTop/html.ejs')
 const {isoCode,createDefaultMeta}=require('localesDir/config')
 const layout = require('./html.ejs')
 
+function getCurPageLang(obj,folder1,folder2,page,defaultMeta){
+  if(!folder1 && folder2 || !page){
+    throw new Error('Error, Check plugins.config.js!!')
+  }
+  if(folder1 && folder2 && page){
+    return resolve(obj,[folder1,folder2,page],0,defaultMeta)
+  }else if(folder1 && page){
+    return resolve(obj,[folder1,page],0,defaultMeta)
+  }else if(page){
+    return resolve(obj,[page],0,defaultMeta)
+  }
+}
+function resolve(obj,keyArr,idx,defaultMeta){
+  if(idx===keyArr.length)return obj
+  if(obj[keyArr[idx]]){
+    return resolve(obj[keyArr[idx]],keyArr,idx+1,defaultMeta)
+  }else{
+    return {meta:defaultMeta}
+  }
+}
+
 const moduleExports = {
   run({
-    preContent,content,affixContent, language, publicPath, folderLocalesName=null,pageLocalesName
-  }={}) {
+        preContent,content,affixContent, language, publicPath, folderLocalesName1=null,folderLocalesName2=null,pageLocalesName
+      }={}) {
     const curLang = locales[language]
-    let curPageLang
-    let defaultMeta=createDefaultMeta(pageLocalesName)
-    if(folderLocalesName){
-      if(!curLang.pages[folderLocalesName]){
-        curLang.pages[folderLocalesName]={
-          [pageLocalesName]:{
-            meta:defaultMeta
-          }
-        }
-      }
-      curPageLang=curLang.pages[folderLocalesName][pageLocalesName]
-    } else {
-      if(!curLang.pages[pageLocalesName]){
-        curLang.pages[pageLocalesName]={
-          meta:defaultMeta
-        }
-      }
-      curPageLang = curLang.pages[pageLocalesName]
-    }
-    // if(folderLocalesName)curPageLang=curLang.pages[folderLocalesName][pageLocalesName]
-    // else curPageLang = curLang.pages[pageLocalesName]
+    let defaultMeta=createDefaultMeta(folderLocalesName1,folderLocalesName2,pageLocalesName)
+    let curPageLang=getCurPageLang(curLang,folderLocalesName1,folderLocalesName2,pageLocalesName,defaultMeta)
     const metaConfig = curPageLang.meta
     metaConfig.lang = isoCode[language]
+
     const formLang = null
-    const footerTemp = footer({ lang: curLang.footer, publicPath, language })
+    let pathPrefix=publicPath+(language!=="en" ? "/"+language : "")
+
     const renderData = {
-      header: header({ htmlLang: metaConfig.lang, language }),
+      header: header({
+        htmlLang: metaConfig.lang,
+        language ,pathPrefix
+      }),
       meta: meta(metaConfig),
-      footer: footerTemp,
+      footer: footer({
+        lang: curLang.footer,
+        publicPath,
+        language ,
+        pathPrefix,
+        pageLocalesName,
+        folderLocalesName1,
+        folderLocalesName2
+      }),
       topNav: topNav({
-        lang: curLang.topNav, publicPath, language, pageLocalesName, folderLocalesName
+        lang: curLang.topNav,
+        publicPath,
+        language,
+        pathPrefix,
+        pageLocalesName,
+        folderLocalesName1,
+        folderLocalesName2
       }),
       externalLinks: externalLinks(),
       preContent: preContent({
-        lang: curPageLang, publicPath, language, formLang,
+        lang: curPageLang,
+        publicPath,
+        pathPrefix,
+        formLang,
       }),
       content: content({
-        lang: curPageLang, publicPath, language, formLang,
+        lang: curPageLang,
+        publicPath,
+        language,
+        pathPrefix,
+        formLang,
       }),
       affixContent: affixContent({
-        lang: curPageLang, publicPath, language, formLang,
+        lang: curPageLang,
+        publicPath,
+        language,
+        pathPrefix,
+        formLang,
       }),
       scrollTop: scrollTop(),
     }
