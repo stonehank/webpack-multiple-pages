@@ -1,0 +1,13 @@
+body{
+  transition: all .3s linear;
+  background-color:var(--background-color);
+  color:var(--text-secondary)
+}
+
+a {
+  color:var(--text-primary);
+  &:link {color:var(--text-primary)}
+  &:visited {color:var(--text-primary)}
+  &:hover {color:var(--theme-primary)}
+  &:active {color:var(--text-primary)}
+}
