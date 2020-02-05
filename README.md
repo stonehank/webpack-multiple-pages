@@ -130,6 +130,10 @@ curLang 当前页面使用的语言变量，如果页面位置`/folder/sub-1.htm
 $t 提供整个项目的语言变量
 ```
 
+* Q: 什么是页面参数
+
+    A: 以上的变量名可以在`ejs`模板中直接使用，语法为`<%= 变量名 %>`
+
 * Q: `publicPath`和`prefixPath`的不同？
 
     A: `publicPath`即公共路径，指的是`webpack-config/config`内填写的公共路径，而`prefixPath`，包括公共路径和当前文件夹的组合；
@@ -192,7 +196,7 @@ $t 提供整个项目的语言变量
 文件夹命名：not-translate-404
 
 -- folder2(内部所有页面都不需要翻译)
-文件夹命名：
+文件夹命名：not-translate-folder-folder2
 ```
     
 ### 图片编译问题
