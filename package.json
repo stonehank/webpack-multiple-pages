@@ -1,6 +1,6 @@
 {
-	"name": "Sample-Project",
-	"version": "0.0.1",
+	"name": "webpack-multiple-page",
+	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
@@ -10,7 +10,7 @@
 		"dll": "cross-env NODE_ENV=production webpack --colors --progress --config webpack.dll.config.js"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "stonehank310@gmail.com",
 	"license": "ISC",
 	"dependencies": {
 		"core-js": "^2.6.5",
