@@ -1,6 +1,7 @@
 <template>
     <div class="sample">
-       Vue
+       <p>Vue</p>
+        <p>Page</p>
     </div>
 </template>
 
@@ -13,6 +14,8 @@
 <style lang="scss" scoped>
     $txtColor:red;
     .sample{
-        color:$txtColor
+        color:$txtColor;
+        display:flex;
+        justify-content: flex-start;
     }
 </style>
